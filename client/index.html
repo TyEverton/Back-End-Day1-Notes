@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Web Development</title>
+    <link rel='stylesheet' href='styles.css'
+    />
+  </head>
+  <body class="body">
+    <h1>Items</h1>
+    <ul id="people" class=""></ul>
+
+    <button id="button">GET Items List</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.getElementById("button").onclick = function () {
+        axios
+          .get("http://localhost:4021/api/users")
+          .then(function (response) {
+            const data = response.data;
+            document.getElementById("people").innerHTML = data
+              .map(function (person) {
+                return '<li class="row">' + person;
+              })
+              .join("");
+          })
+          .catch(function (err) {
+            document.getElementById("people").innerHTML =
+              '<li class="text-danger">' + err.message + "</li>";
+          });
+      };
+    </script>
+  </body>
+</html>
